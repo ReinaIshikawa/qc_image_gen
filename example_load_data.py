@@ -59,5 +59,17 @@ if __name__ == "__main__":
         plt.show()
         break
 
-
+    """expected output
+    seed : 0
+    --------------------------------
+    sample images with dataloader
+    --------------------------------
+    sample 0 images shape: torch.Size([16, 1, 16, 16])
+    sample 0 labels shape: torch.Size([16])
+    (show sample image of label 6 on a popup window)
+    --------------------------------
+    sample images directly from dataset
+    --------------------------------
+    (show sample image of label 6 on a popup window)
+    """
 
