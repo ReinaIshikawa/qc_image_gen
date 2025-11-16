@@ -8,12 +8,20 @@ if __name__ == "__main__":
       r_config = config["randomness_evaluation"]
 
       # Test all input patterns
+      quantum_random_data = np.load("samples/quantum_random_32x32x4_fp32.npy")
+      # Convert float32 to uint8 (0-255 range) if needed
+      if quantum_random_data.dtype != np.uint8:
+            # Normalize to 0-255 range
+            quantum_random_data = (quantum_random_data - quantum_random_data.min()) / (quantum_random_data.max() - quantum_random_data.min() + 1e-10)
+            quantum_random_data = (quantum_random_data * 255).astype(np.uint8)
+      
       test_cases = [
             ("2D grayscale", np.random.randint(0, 256, (32,32)).astype(np.uint8)),
             ("3D RGB", np.random.randint(0, 256, (32, 32, 3)).astype(np.uint8)),
             ("3D RGBA", np.random.randint(0, 256, (32, 32, 4)).astype(np.uint8)),
             ("4D multiple grayscale", np.random.randint(0, 256, (200, 32, 32)).astype(np.uint8)),
             ("4D multiple RGB", np.random.randint(0, 256, (200, 32, 32, 3)).astype(np.uint8)),
+            ("Quantum random 32x32x4", quantum_random_data),
       ]
       
       for test_name, img in test_cases:
@@ -128,4 +136,19 @@ if __name__ == "__main__":
       3) FFT variance: 177275.8147 (Random: True)
       4) Moran's I: -0.0009 (Random: True)
       5) Runs z-score: 0.0379 (Random: True)
+
+      ============================================================
+      Test: Quantum random 32x32x4
+      ============================================================
+      Image shape: (32, 32, 4)
+      Pixel value range: [0, 255]
+      ------------------------------------------------------------
+      Is Random (Overall): True
+
+      Test Results:
+      1) Chi-Square p-value: 0.5877 (Random: True)
+      2) Correlation: h=0.0181, v=-0.0007 (Random: True)
+      3) FFT variance: 168653.7726 (Random: True)
+      4) Moran's I: 0.0087 (Random: True)
+      5) Runs z-score: -0.3136 (Random: True)
       """
