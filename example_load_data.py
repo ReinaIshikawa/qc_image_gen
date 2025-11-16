@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
-from scripts.mnist_loader import CustomMNISTDataset
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
+from scripts.mnist_loader import CustomMNISTDataset
 from scripts.utils import setup_all_seed, yaml_load
 
 
@@ -38,6 +38,9 @@ if __name__ == "__main__":
 
     # show sample images with dataloader
     for i, (sample_images, sample_labels) in enumerate(train_loader):
+        print("--------------------------------")
+        print("sample images with dataloader")
+        print("--------------------------------")
         print(f"sample {i} images shape: {sample_images.shape}")
         print(f"sample {i} labels shape: {sample_labels.shape}")
         plt.imshow(sample_images[0].view(-1, config_dataset['image_size']), cmap='gray')
@@ -47,8 +50,14 @@ if __name__ == "__main__":
 
     # show sample images directly from dataset
     for i in range(10):
+        print("--------------------------------")
+        print("sample images directly from dataset")
+        print("--------------------------------")
         image, label = train_dataset[i]
         plt.imshow(image.view(-1, config_dataset['image_size']), cmap='gray')
         plt.title(f"label : {label}")
         plt.show()
         break
+
+
+

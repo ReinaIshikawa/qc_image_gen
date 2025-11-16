@@ -1,0 +1,6 @@
+dataset:
+  root_dir: "data/qc_challenge_dataset"
+  image_size: 16
+  download: true
+  batch_size: 16
+  num_workers: 2

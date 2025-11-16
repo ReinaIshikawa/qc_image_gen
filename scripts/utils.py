@@ -1,6 +1,8 @@
 import numpy as np
 import torch
 import yaml
+from scipy.stats import chisquare
+from scipy.fft import fft2
 
 def setup_all_seed(seed=0):
     np.random.seed(seed)
