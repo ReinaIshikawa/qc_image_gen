@@ -3,6 +3,7 @@ from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 from scripts.mnist_loader import CustomMNISTDataset
 from scripts.utils import setup_all_seed, yaml_load
+import os
 
 
 
@@ -45,6 +46,8 @@ if __name__ == "__main__":
         print(f"sample {i} labels shape: {sample_labels.shape}")
         plt.imshow(sample_images[0].view(-1, config_dataset['image_size']), cmap='gray')
         plt.title(f"label : {sample_labels[0]}")
+        # os.makedirs('samples', exist_ok=True)
+        # plt.savefig('samples/mnist_sample.png')
         plt.show()
         break
 
