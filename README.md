@@ -16,6 +16,11 @@ The loaded dataset provides pairs of:
 - Label
   - Integer from 0 to 9
 
+**Sample Image**
+
+<img src="samples/mnist_sample.png" alt="Sample Image" width="200">
+
+
 # 2. Randomness evaluation
 
 Use these metrics to assess whether a noise image is truly random.
