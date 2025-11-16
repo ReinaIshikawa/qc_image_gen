@@ -16,4 +16,4 @@ randomness_evaluation:
   use_adaptive_fft: true
   fft_baseline_n_samples: 100
   fft_baseline_random_seed: null
-  quantum_random_data_path: "samples/quantum_random_32x32x4_fp32.npy"
+  quantum_random_data_path: "samples/quantum_random_32x32x4x256_fp32.npy"

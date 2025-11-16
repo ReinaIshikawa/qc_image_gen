@@ -8,7 +8,10 @@ if __name__ == "__main__":
       r_config = config["randomness_evaluation"]
 
       # Test all input patterns
-      quantum_random_data = np.load("samples/quantum_random_32x32x4_fp32.npy")
+      quantum_random_data = np.load(r_config["quantum_random_data_path"])
+      # Convert from (H, W, C, N) to (N, H, W, C)
+      quantum_random_data = quantum_random_data.transpose(3, 0, 1, 2)
+      print(quantum_random_data.shape)
       # Convert float32 to uint8 (0-255 range) if needed
       if quantum_random_data.dtype != np.uint8:
             # Normalize to 0-255 range
@@ -59,9 +62,11 @@ if __name__ == "__main__":
                   f"(Random: {results['morans_i']['is_random']})")
             print(f"  5) Runs z-score: {results['runs']['z_score']:.4f} "
                   f"(Random: {results['runs']['is_random']})")
+            print("    * Chi-Square p-value: For multiple images, the compute proportion of random images")
             print()
 
       """expected output
+      (256, 32, 32, 4)
       ============================================================
       Test: 2D grayscale
       ============================================================
@@ -76,6 +81,7 @@ if __name__ == "__main__":
       3) FFT variance: 156232.7953 (Random: True)
       4) Moran's I: -0.0235 (Random: False)
       5) Runs z-score: -0.0386 (Random: True)
+      * Chi-Square p-value: For multiple images, compute proportion of random images
 
       ============================================================
       Test: 3D RGB
@@ -91,6 +97,7 @@ if __name__ == "__main__":
       3) FFT variance: 183800.9546 (Random: True)
       4) Moran's I: -0.0116 (Random: True)
       5) Runs z-score: 0.0331 (Random: True)
+      * Chi-Square p-value: For multiple images, compute proportion of random images
 
       ============================================================
       Test: 3D RGBA
@@ -106,6 +113,7 @@ if __name__ == "__main__":
       3) FFT variance: 182223.5988 (Random: True)
       4) Moran's I: -0.0098 (Random: True)
       5) Runs z-score: -0.0987 (Random: True)
+      * Chi-Square p-value: For multiple images, compute proportion of random images
 
       ============================================================
       Test: 4D multiple grayscale
@@ -121,6 +129,7 @@ if __name__ == "__main__":
       3) FFT variance: 1151131.0090 (Random: True)
       4) Moran's I: 0.0009 (Random: True)
       5) Runs z-score: -0.2296 (Random: True)
+      * Chi-Square p-value: For multiple images, compute proportion of random images
 
       ============================================================
       Test: 4D multiple RGB
@@ -136,19 +145,21 @@ if __name__ == "__main__":
       3) FFT variance: 177275.8147 (Random: True)
       4) Moran's I: -0.0009 (Random: True)
       5) Runs z-score: 0.0379 (Random: True)
+      * Chi-Square p-value: For multiple images, compute proportion of random images
 
       ============================================================
       Test: Quantum random 32x32x4
       ============================================================
-      Image shape: (32, 32, 4)
+      Image shape: (256, 32, 32, 4)
       Pixel value range: [0, 255]
       ------------------------------------------------------------
       Is Random (Overall): True
 
       Test Results:
-      1) Chi-Square p-value: 0.5877 (Random: True)
-      2) Correlation: h=0.0181, v=-0.0007 (Random: True)
-      3) FFT variance: 168653.7726 (Random: True)
-      4) Moran's I: 0.0087 (Random: True)
-      5) Runs z-score: -0.3136 (Random: True)
+      1) Chi-Square p-value: 1.0000 (Random: True)
+      2) Correlation: h=-0.0008, v=-0.0019 (Random: True)
+      3) FFT variance: 176689.8550 (Random: True)
+      4) Moran's I: -0.0014 (Random: True)
+      5) Runs z-score: 0.0187 (Random: True)
+      * Chi-Square p-value: For multiple images, compute proportion of random images
       """

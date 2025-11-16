@@ -43,6 +43,8 @@ Refer to the example code in `example_evaluate_randomness.py` for details on how
 - Large $\chi^2$ (small p) → deviates from uniformity (non-random generator or biased range).
 - Reasonable $\chi^2$ (non-small p) → consistent with uniformity.
 
+* For multiple images, compute proportion of random images (statistically more appropriate than combining p-values)
+
 **Pitfalls:**
 - Sparse counts ($E_i \approx 1$) reduce test reliability; aggregate bins or evaluate multiple images.
 
